@@ -1,4 +1,5 @@
 require "hairails/helpers/version"
+require "hairails/helpers/runner"
 
 module Hairails
   module Helpers
