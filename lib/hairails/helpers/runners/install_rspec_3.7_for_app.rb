@@ -10,6 +10,8 @@ gem_group :test do
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
   gem 'database_cleaner'
+  gem 'simplecov'
+  gem 'webmock'
 end
 
 # Now, run bundle --------------------------------------------------
@@ -51,6 +53,21 @@ insert_into_file 'spec/rails_helper.rb', before: /end\Z/ do <<-RUBY
     end
   end
 RUBY
+end
+
+# Setup SimpleCov and Webmock
+insert_into_file 'spec/spec_helper.rb', before: 'RSpec.configure' do <<-RUBY
+require 'simplecov'
+require 'webmock/rspec'
+
+SimpleCov.start 'rails'
+
+RUBY
+end
+
+insert_into_file '.gitignore', before: /\Z/ do <<-eos
+coverage
+eos
 end
 
 # Create a first test -----------------------------------------------
